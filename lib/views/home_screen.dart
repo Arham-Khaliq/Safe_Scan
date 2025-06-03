@@ -540,6 +540,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+
           const SizedBox(height: 30),
           _buildVideoResultCard(
             icon: Icons.play_circle_filled_rounded,
@@ -588,54 +589,58 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // Play/Pause button
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // Play/Pause button
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.9),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    if (videoController.value.isPlaying) {
+                      videoController.pause();
+                    } else {
+                      videoController.play();
+                    }
+                  },
+                  icon: Icon(
+                    videoController.value.isPlaying
+                        ? Icons.pause_rounded
+                        : Icons.play_arrow_rounded,
+                    color: videoColor,
+                    size: 32,
                   ),
-                ],
-              ),
-              child: IconButton(
-                onPressed: () {
-                  if (videoController.value.isPlaying) {
-                    videoController.pause();
-                  } else {
-                    videoController.play();
-                  }
-                },
-                icon: Icon(
-                  videoController.value.isPlaying
-                      ? Icons.pause_rounded
-                      : Icons.play_arrow_rounded,
-                  color: videoColor,
-                  size: 32,
                 ),
               ),
-            ),
-            // Progress bar
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: VideoProgressIndicator(
-                videoController,
-                allowScrubbing: true,
-                colors: VideoProgressColors(
-                  playedColor: videoColor,
-                  bufferedColor: Colors.white.withOpacity(0.3),
-                  backgroundColor: Colors.white.withOpacity(0.1),
+              // Progress bar
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: VideoProgressIndicator(
+                  videoController,
+                  allowScrubbing: true,
+                  colors: VideoProgressColors(
+                    playedColor: videoColor,
+                    bufferedColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withOpacity(0.1),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     });
