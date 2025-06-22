@@ -1,5 +1,9 @@
 # safe_scan
 
+here use this backend 
+https://github.com/Arham-Khaliq/Flask-Safe-Scan.git
+just install required dependencies from requirement.txt and run it and use as local host
+
 A new Flutter project.
 
 ## Getting Started
